@@ -1,5 +1,8 @@
 # leanest-site
 
+[![CI](https://github.com/baronunread/leanest-site/actions/workflows/ci.yml/badge.svg)](https://github.com/baronunread/leanest-site/actions)
+[![React Doctor](https://github.com/baronunread/leanest-site/actions/workflows/react-doctor.yml/badge.svg)](https://github.com/baronunread/leanest-site/actions)
+
 The marketing page for [leanest](https://github.com/baronunread/leanest), a local-first test selector.
 
 Vite + React + TypeScript + Tailwind v4. No backend, no analytics, no build step beyond `vite build`.

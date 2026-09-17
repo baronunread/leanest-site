@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "react-doctor": "react-doctor",
+    "style": "style-doctor README.md",
+    "check": "bun run lint && bun run build && bun run style && bun run react-doctor"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -22,6 +25,8 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "react-doctor": "^0.9.14",
+    "style-doctor": "^0.3.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }
