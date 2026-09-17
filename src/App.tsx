@@ -106,6 +106,19 @@ function CopyButton({ text }: { text: string }) {
   )
 }
 
+function Fenced({ children, className = '' }: { children: string; className?: string }) {
+  return (
+    <div className="relative">
+      <pre
+        className={`overflow-x-auto font-mono text-xs leading-relaxed text-[#c9d1cb] sm:text-[13px] ${className}`}
+      >
+        {children}
+      </pre>
+      <div className="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-[#121513] to-transparent" />
+    </div>
+  )
+}
+
 function Nav() {
   return (
     <header className="sticky top-0 z-20 border-b border-[#1c211d] bg-[#0b0d0c]/90 backdrop-blur">
@@ -188,9 +201,7 @@ function Hero() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]" />
             <span className="ml-2 font-mono text-xs text-[#7c8a80]">real output, rdyrct #236</span>
           </div>
-          <pre className="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-relaxed text-[#c9d1cb]">
-{TERMINAL_OUTPUT}
-          </pre>
+          <Fenced className="px-5 py-5">{TERMINAL_OUTPUT}</Fenced>
         </div>
       </div>
     </section>
@@ -328,7 +339,7 @@ function Byok() {
               No key, an expired one, or a timeout all resolve the same way: leanest runs the full
               suite and prints why, instead of silently skipping coverage.
             </p>
-            <pre className="mt-6 overflow-x-auto rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] text-[#c9d1cb]">
+            <pre className="mt-6 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">
 ⚠ Jev unavailable (...), running the full suite.
             </pre>
           </div>
@@ -337,13 +348,13 @@ function Byok() {
             <div className="font-mono text-xs tracking-wide text-[#7c8a80]">
               set the secret once
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] text-[#c9d1cb]">
+            <pre className="mt-3 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">
 gh secret set TYPESAFE_API_KEY --repo you/your-repo
             </pre>
             <div className="mt-6 font-mono text-xs tracking-wide text-[#7c8a80]">
               reference it in the workflow
             </div>
-            <pre className="mt-3 overflow-x-auto rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] text-[#c9d1cb]">
+            <pre className="mt-3 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">
 {'typesafe-api-key: ${{ secrets.TYPESAFE_API_KEY }}'}
             </pre>
             <p className="mt-4 text-sm text-[#7c8a80]">
@@ -395,9 +406,7 @@ function Cta() {
             <span className="font-mono text-xs text-[#7c8a80]">.github/workflows/test.yml</span>
             <CopyButton text={ACTION_YAML} />
           </div>
-          <pre className="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-relaxed text-[#c9d1cb]">
-{ACTION_YAML}
-          </pre>
+          <Fenced className="px-5 py-5">{ACTION_YAML}</Fenced>
         </div>
       </div>
     </section>
