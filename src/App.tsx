@@ -186,7 +186,7 @@ function Hero() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]" />
-            <span className="ml-2 font-mono text-xs text-[#7c8a80]">real output, one PR</span>
+            <span className="ml-2 font-mono text-xs text-[#7c8a80]">real output, rdyrct #236</span>
           </div>
           <pre className="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-relaxed text-[#c9d1cb]">
 {TERMINAL_OUTPUT}
@@ -219,9 +219,18 @@ function Stats() {
           </div>
         </div>
         <p className="mt-8 max-w-2xl text-sm text-[#7c8a80]">
-          Measured on one real PR against this repo's playwright suite. A pure CI or config diff
-          gives Jev no application code to reason about, so confidence drops and leanest runs
-          closer to everything, on purpose. The number above is the representative case: a real
+          Measured on{' '}
+          <a
+            href="https://github.com/baronunread/rdyrct/pull/236"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#9aa39d] underline decoration-[#2c332e] underline-offset-2 hover:text-[#f2f4f2]"
+          >
+            a real PR against rdyrct
+          </a>
+          's Playwright suite. A pure CI or config diff gives Jev no application code to reason
+          about, so confidence drops and leanest runs closer to everything, on purpose. The number
+          above is the representative case: a real
           feature change.
         </p>
       </div>
