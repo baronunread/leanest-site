@@ -5,7 +5,9 @@
 
 The marketing page for [leanest](https://github.com/baronunread/leanest), a local-first test selector.
 
-Vite + React + TypeScript + Tailwind v4. No backend, no analytics, no build step beyond `vite build`.
+**Live:** [leanest.pages.dev](https://leanest.pages.dev/)
+
+Vite + React + TypeScript + Tailwind v4. No backend, no analytics, no build step beyond `vite build`. Deployed on Cloudflare Pages.
 
 ## Develop
 
