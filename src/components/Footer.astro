@@ -1,0 +1,20 @@
+---
+import Logo from './Logo.astro'
+import { REPO, NPM } from '../data'
+---
+
+<footer>
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row">
+    <div class="flex items-center gap-2.5">
+      <Logo size={22} />
+      <span class="text-sm text-[#7c8a80]">leanest, MIT licensed</span>
+    </div>
+    <div class="flex items-center gap-6 text-sm text-[#9aa39d]">
+      <a href={REPO} target="_blank" rel="noreferrer" class="hover:text-[#f2f4f2]">GitHub</a>
+      <a href={NPM} target="_blank" rel="noreferrer" class="hover:text-[#f2f4f2]">npm</a>
+      <a href={`${REPO}/blob/main/LICENSE`} target="_blank" rel="noreferrer" class="hover:text-[#f2f4f2]">
+        License
+      </a>
+    </div>
+  </div>
+</footer>

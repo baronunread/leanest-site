@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro'
+import Fenced from './Fenced.astro'
+import CopyButton from './CopyButton.astro'
+import { REPO, NPM, ACTION_YAML } from '../data'
+---
+
+<section id="cta" class="border-b border-[#1c211d]">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight">Add it to your repo</h2>
+        <p class="mt-3 max-w-lg text-[#9aa39d]">
+          Replace your existing "run e2e tests" step. Same reporter, same exit code, fewer tests
+          executed.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3 md:justify-end">
+        <a
+          href={REPO}
+          target="_blank"
+          rel="noreferrer"
+          class="flex items-center gap-1.5 rounded-md border border-[#263029] px-4 py-2.5 text-sm font-medium transition-colors hover:border-[#3a4a3f]"
+        >
+          <Icon name="github-logo" size={16} />
+          View on GitHub
+        </a>
+        <a
+          href={NPM}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-md border border-[#263029] px-4 py-2.5 text-sm font-medium transition-colors hover:border-[#3a4a3f]"
+        >
+          npm
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-8 overflow-hidden rounded-xl border border-[#232623] bg-[#121513]">
+      <div class="flex items-center justify-between border-b border-[#1c211d] px-4 py-2.5">
+        <span class="font-mono text-xs text-[#7c8a80]">.github/workflows/test.yml</span>
+        <CopyButton text={ACTION_YAML} />
+      </div>
+      <Fenced class="px-5 py-5">{ACTION_YAML}</Fenced>
+    </div>
+  </div>
+</section>

@@ -4,30 +4,22 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
     "lint": "oxlint",
-    "preview": "vite preview",
-    "react-doctor": "react-doctor",
+    "preview": "astro preview",
     "style": "style-doctor README.md",
-    "check": "bun run lint && bun run build && bun run style && bun run react-doctor"
+    "check": "bun run lint && bun run build && bun run style"
   },
   "dependencies": {
-    "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.3.3",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "astro": "^5.3.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
+    "@astrojs/check": "^0.9.4",
     "oxlint": "^1.81.0",
-    "react-doctor": "^0.9.14",
     "style-doctor": "^0.3.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "typescript": "~6.0.2"
   }
 }

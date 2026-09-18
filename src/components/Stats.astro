@@ -1,0 +1,38 @@
+---
+---
+
+<section class="border-b border-[#1c211d]">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid grid-cols-1 divide-y divide-[#1c211d] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      <div class="py-6 sm:px-8 sm:py-0">
+        <div class="font-mono text-xs tracking-wide text-[#7c8a80]">full suite</div>
+        <div class="mt-3 text-4xl font-bold tracking-tight">7m 25s</div>
+        <div class="mt-1 font-mono text-sm text-[#9aa39d]">153 tests · 35 spec files</div>
+      </div>
+      <div class="py-6 sm:px-8 sm:py-0">
+        <div class="font-mono text-xs tracking-wide text-[#5fdba0]">leanest-selected</div>
+        <div class="mt-3 text-4xl font-bold tracking-tight text-[#7cf0b6]">1m 28s</div>
+        <div class="mt-1 font-mono text-sm text-[#8fd6ac]">7 tests · 3 spec files</div>
+      </div>
+      <div class="py-6 sm:px-8 sm:py-0">
+        <div class="font-mono text-xs tracking-wide text-[#7c8a80]">this run</div>
+        <div class="mt-3 text-4xl font-bold tracking-tight">5.1&times; faster</div>
+        <div class="mt-1 font-mono text-sm text-[#9aa39d]">26.5k Jev tokens, 1.6s</div>
+      </div>
+    </div>
+    <p class="mt-8 max-w-2xl text-sm text-[#7c8a80]">
+      Measured on
+      <a
+        href="https://github.com/baronunread/rdyrct/pull/236"
+        target="_blank"
+        rel="noreferrer"
+        class="text-[#9aa39d] underline decoration-[#2c332e] underline-offset-2 hover:text-[#f2f4f2]"
+      >
+        a real PR against rdyrct
+      </a>
+      's Playwright suite. A pure CI or config diff gives Jev no application code to reason about,
+      so confidence drops and leanest runs closer to everything, on purpose. The number above is
+      the representative case: a real feature change.
+    </p>
+  </div>
+</section>

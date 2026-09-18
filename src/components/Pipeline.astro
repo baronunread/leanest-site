@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro'
+import { PIPELINE } from '../data'
+---
+
+<section class="border-b border-[#1c211d]">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <h2 class="text-2xl font-semibold tracking-tight">How it decides</h2>
+    <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-5 sm:gap-6">
+      {
+        PIPELINE.map(({ icon, label, body }, i) => (
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-2">
+              <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-[#232623] bg-[#121513]">
+                <Icon name={icon} size={17} class="text-[#5fdba0]" />
+              </div>
+              {i < PIPELINE.length - 1 && (
+                <Icon name="caret-right" size={14} class="hidden text-[#3a3f3b] sm:block" />
+              )}
+            </div>
+            <div class="text-sm font-semibold">{label}</div>
+            <p class="text-sm text-[#9aa39d]">{body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

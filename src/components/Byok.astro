@@ -1,0 +1,43 @@
+---
+---
+
+<section id="byok" class="border-b border-[#1c211d] bg-[#0e1210]">
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div>
+        <div
+          class="inline-flex items-center rounded-full border border-[#2c5842] bg-[#10241b] px-3 py-1 font-mono text-xs text-[#5fdba0]"
+        >
+          bring your own key
+        </div>
+        <h2 class="mt-4 text-2xl font-semibold tracking-tight">Your key, your account, your data.</h2>
+        <p class="mt-4 text-[#9aa39d]">
+          leanest has no server of its own. The CLI calls TypeSafe's Jev API directly with your
+          <code class="font-mono text-[#c9d1cb]">TYPESAFE_API_KEY</code>. Nothing routes through
+          leanest's infrastructure, because there isn't any.
+        </p>
+        <p class="mt-4 text-[#9aa39d]">
+          No key, an expired one, or a timeout all resolve the same way: leanest runs the full
+          suite and prints why, instead of silently skipping coverage.
+        </p>
+        <pre
+          class="mt-6 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">⚠ Jev unavailable (...), running the full suite.</pre>
+      </div>
+
+      <div>
+        <div class="font-mono text-xs tracking-wide text-[#7c8a80]">set the secret once</div>
+        <pre
+          class="mt-3 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">gh secret set TYPESAFE_API_KEY --repo you/your-repo</pre>
+        <div class="mt-6 font-mono text-xs tracking-wide text-[#7c8a80]">
+          reference it in the workflow
+        </div>
+        <pre
+          class="mt-3 rounded-lg border border-[#232623] bg-[#121513] px-4 py-3 font-mono text-[13px] break-words whitespace-pre-wrap text-[#c9d1cb]">typesafe-api-key: {'${{ secrets.TYPESAFE_API_KEY }}'}</pre>
+        <p class="mt-4 text-sm text-[#7c8a80]">
+          GitHub does not expose repo secrets to workflows triggered from forked-repo pull requests
+          by default, the same protection Codecov and similar tokens rely on.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

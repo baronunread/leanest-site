@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro'
+
+interface Props {
+  text: string
+}
+
+const { text } = Astro.props
+---
+
+<button
+  type="button"
+  data-copy-button
+  data-copy-text={text}
+  class="flex items-center gap-1.5 rounded-md border border-[#263029] px-2.5 py-1.5 font-mono text-xs text-[#9aa39d] transition-colors hover:border-[#3a4a3f] hover:text-[#f2f4f2]"
+>
+  <Icon name="copy" size={14} class="copy-icon" />
+  <Icon name="check" size={14} class="check-icon hidden" />
+  <span class="copy-label">Copy</span>
+</button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-button]').forEach((button) => {
+    const text = button.dataset.copyText ?? ''
+    const copyIcon = button.querySelector('.copy-icon')
+    const checkIcon = button.querySelector('.check-icon')
+    const label = button.querySelector('.copy-label')
+
+    let resetTimer: ReturnType<typeof setTimeout> | undefined
+
+    button.addEventListener('click', () => {
+      navigator.clipboard.writeText(text).catch(() => {})
+      copyIcon?.classList.add('hidden')
+      checkIcon?.classList.remove('hidden')
+      if (label) label.textContent = 'Copied'
+
+      clearTimeout(resetTimer)
+      resetTimer = setTimeout(() => {
+        copyIcon?.classList.remove('hidden')
+        checkIcon?.classList.add('hidden')
+        if (label) label.textContent = 'Copy'
+      }, 1600)
+    })
+  })
+</script>

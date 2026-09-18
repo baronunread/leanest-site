@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<div class="relative">
+  <pre
+    class:list={[
+      'overflow-x-auto font-mono text-xs leading-relaxed text-[#c9d1cb] sm:text-[13px]',
+      className,
+    ]}><slot /></pre>
+  <div
+    class="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-[#121513] to-transparent"
+  >
+  </div>
+</div>
