@@ -1,0 +1,63 @@
+---
+import { parseUnifiedDiff } from '../lib/parseDiff'
+
+interface Props {
+  patch: string
+  class?: string
+}
+
+const { patch, class: className = '' } = Astro.props
+const lines = parseUnifiedDiff(patch)
+
+const rowClass: Record<string, string> = {
+  add: 'bg-[#2ea04326]',
+  del: 'bg-[#f8514926]',
+  hunk: 'bg-[#388bfd1a]',
+  context: '',
+}
+const numClass: Record<string, string> = {
+  add: 'text-[#3fb950]/70',
+  del: 'text-[#f85149]/70',
+  hunk: 'text-[#79c0ff]',
+  context: 'text-[#6e7681]',
+}
+const markerClass: Record<string, string> = {
+  add: 'text-[#3fb950]',
+  del: 'text-[#f85149]',
+  hunk: '',
+  context: '',
+}
+const marker: Record<string, string> = { add: '+', del: '-', hunk: '', context: '' }
+---
+
+<div class:list={['overflow-x-auto font-mono text-xs leading-relaxed sm:text-[13px]', className]}>
+  <table class="w-full border-collapse">
+    <tbody>
+      {
+        lines.map((line) =>
+          line.type === 'hunk' ? (
+            <tr class={rowClass.hunk}>
+              <td class="w-0 px-3 py-0.5 text-right whitespace-nowrap select-none" />
+              <td class="w-0 px-3 py-0.5 text-right whitespace-nowrap select-none" />
+              <td class={`px-3 py-0.5 ${numClass.hunk}`}>{line.content}</td>
+            </tr>
+          ) : (
+            <tr class={rowClass[line.type]}>
+              <td class={`w-0 px-3 py-0.5 text-right whitespace-nowrap select-none ${numClass[line.type]}`}>
+                {line.oldNum ?? ''}
+              </td>
+              <td class={`w-0 px-3 py-0.5 text-right whitespace-nowrap select-none ${numClass[line.type]}`}>
+                {line.newNum ?? ''}
+              </td>
+              <td class="px-3 py-0.5 whitespace-pre text-[#c9d1cb]">
+                <span class:list={['mr-1 inline-block w-2', markerClass[line.type]]}>
+                  {marker[line.type]}
+                </span>{line.content}
+              </td>
+            </tr>
+          ),
+        )
+      }
+    </tbody>
+  </table>
+</div>
