@@ -1,8 +1,6 @@
 ---
 import Icon from './Icon.astro'
-import Fenced from './Fenced.astro'
-import CopyButton from './CopyButton.astro'
-import { REPO, NPM, ACTION_YAML } from '../data'
+import { REPO, NPM } from '../data'
 ---
 
 <section id="cta" class="border-b border-[#1c211d]">
@@ -16,6 +14,12 @@ import { REPO, NPM, ACTION_YAML } from '../data'
         </p>
       </div>
       <div class="flex flex-wrap gap-3 md:justify-end">
+        <a
+          href="/docs#ci"
+          class="flex items-center gap-1.5 rounded-md bg-[#5fdba0] px-4 py-2.5 text-sm font-semibold text-[#08150f] transition-colors hover:bg-[#7cf0b6]"
+        >
+          Read the docs
+        </a>
         <a
           href={REPO}
           target="_blank"
@@ -34,14 +38,6 @@ import { REPO, NPM, ACTION_YAML } from '../data'
           npm
         </a>
       </div>
-    </div>
-
-    <div class="mt-8 overflow-hidden rounded-xl border border-[#232623] bg-[#121513]">
-      <div class="flex items-center justify-between border-b border-[#1c211d] px-4 py-2.5">
-        <span class="font-mono text-xs text-[#7c8a80]">full step</span>
-        <CopyButton text={ACTION_YAML} />
-      </div>
-      <Fenced class="px-5 py-5">{ACTION_YAML}</Fenced>
     </div>
   </div>
 </section>
