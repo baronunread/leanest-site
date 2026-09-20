@@ -8,7 +8,7 @@ export const ACTION_YAML = `- uses: actions/checkout@v4
 - uses: baronunread/leanest@v1
   with:
     framework: playwright
-    typesafe-api-key: \${{ secrets.TYPESAFE_API_KEY }}`
+    # defaults to classifier-dev: free, no key needed`
 
 export const TERMINAL_OUTPUT = `$ leanest select playwright --base origin/main
 
@@ -43,7 +43,7 @@ export const PIPELINE = [
   {
     icon: 'sparkle',
     label: 'Judge',
-    body: 'One semantic question per test, evaluated in parallel by Jev: could this diff affect it.',
+    body: 'One semantic question per test, evaluated in parallel by your judge provider: could this diff affect it.',
   },
   {
     icon: 'list-checks',
@@ -62,6 +62,17 @@ export const COMMANDS: Array<{ cmd: string; body: string }> = [
   { cmd: 'leanest vitest', body: 'Select, then actually run Vitest on the selection.' },
   { cmd: 'leanest select playwright', body: 'Show the selection only, run nothing.' },
   { cmd: 'leanest inspect playwright', body: 'Rank every test by relevance, for debugging.' },
+]
+
+export const PROVIDERS: Array<{ name: string; how: string; key: string; default?: boolean }> = [
+  {
+    name: 'classifier-dev',
+    how: 'classifier.dev, a free zero-shot classifier',
+    key: 'none',
+    default: true,
+  },
+  { name: 'jev', how: "TypeSafe's Jev, over HTTP", key: 'TYPESAFE_API_KEY' },
+  { name: 'laya', how: 'Laya, self-hosted, runs in-process via ONNX Runtime', key: 'none' },
 ]
 
 export const OPTIONS: Array<{ flag: string; body: string }> = [
