@@ -28,25 +28,6 @@ export const CI_PATCH = `--- a/.github/workflows/test.yml
 +          # defaults to classifier-dev: free, no key needed
 `
 
-export const TERMINAL_OUTPUT = `$ leanest select playwright --base origin/main
-
-Changed:
-  src/app/lib/api.ts
-  src/app/lib/csv.ts
-  src/worker/email-layout.ts
-  src/worker/routes/admin.ts
-  tests/e2e/admin-users-export.pw.ts
-
-35 tests found
-
-Selected 4 / 35 tests
-  RUN tests/e2e/admin-users-export.pw.ts
-  RUN tests/e2e/billing-truth.pw.ts
-  RUN tests/e2e/downgrade.pw.ts
-  RUN tests/e2e/privacy-and-email-abuse.pw.ts
-
-Skipping 31 tests.`
-
 export const PIPELINE = [
   {
     icon: 'git-branch',

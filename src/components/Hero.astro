@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro'
-import Fenced from './Fenced.astro'
-import { REPO, TERMINAL_OUTPUT } from '../data'
+import GithubDiff from './GithubDiff.astro'
+import { REPO, CI_PATCH } from '../data'
 ---
 
 <section
@@ -41,9 +41,9 @@ import { REPO, TERMINAL_OUTPUT } from '../data'
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
-        <span class="ml-2 font-mono text-xs text-[#7c8a80]">real output, rdyrct #236</span>
+        <span class="ml-2 font-mono text-xs text-[#7c8a80]">.github/workflows/test.yml</span>
       </div>
-      <Fenced class="px-5 py-5">{TERMINAL_OUTPUT}</Fenced>
+      <GithubDiff class="py-3" patch={CI_PATCH} />
     </div>
   </div>
 </section>
