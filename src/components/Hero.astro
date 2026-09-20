@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro'
-import Fenced from './Fenced.astro'
-import { REPO, TERMINAL_OUTPUT } from '../data'
+import GithubDiff from './GithubDiff.astro'
+import { REPO, CI_PATCH } from '../data'
 ---
 
 <section
@@ -10,11 +10,12 @@ import { REPO, TERMINAL_OUTPUT } from '../data'
 >
   <div class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-24">
     <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-      Run only the tests your PR can actually affect.
+      Simplify CI. Stop running your whole suite on every PR.
     </h1>
     <p class="mt-5 max-w-xl text-lg text-[#9aa39d]">
-      Diffs your PR, judges each test's relevance in parallel, and runs the real subset through
-      your existing runner.
+      leanest diffs your PR, judges each test's relevance in parallel, and hands the real subset
+      to your existing runner &mdash; Playwright or Vitest, unmodified. One step replaces the one
+      you have, and it fails open, so a broken judge never hides a test.
     </p>
     <div class="mt-8 flex flex-wrap items-center gap-3">
       <a
@@ -40,9 +41,9 @@ import { REPO, TERMINAL_OUTPUT } from '../data'
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-[#3a3f3b]"></span>
-        <span class="ml-2 font-mono text-xs text-[#7c8a80]">real output, rdyrct #236</span>
+        <span class="ml-2 font-mono text-xs text-[#7c8a80]">.github/workflows/test.yml</span>
       </div>
-      <Fenced class="px-5 py-5">{TERMINAL_OUTPUT}</Fenced>
+      <GithubDiff class="py-3" patch={CI_PATCH} />
     </div>
   </div>
 </section>

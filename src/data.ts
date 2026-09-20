@@ -8,26 +8,25 @@ export const ACTION_YAML = `- uses: actions/checkout@v4
 - uses: baronunread/leanest@v1
   with:
     framework: playwright
-    typesafe-api-key: \${{ secrets.TYPESAFE_API_KEY }}`
+    # defaults to classifier-dev: free, no key needed`
 
-export const TERMINAL_OUTPUT = `$ leanest select playwright --base origin/main
-
-Changed:
-  src/app/lib/api.ts
-  src/app/lib/csv.ts
-  src/worker/email-layout.ts
-  src/worker/routes/admin.ts
-  tests/e2e/admin-users-export.pw.ts
-
-35 tests found
-
-Selected 4 / 35 tests
-  RUN tests/e2e/admin-users-export.pw.ts
-  RUN tests/e2e/billing-truth.pw.ts
-  RUN tests/e2e/downgrade.pw.ts
-  RUN tests/e2e/privacy-and-email-abuse.pw.ts
-
-Skipping 31 tests.`
+export const CI_PATCH = `--- a/.github/workflows/test.yml
++++ b/.github/workflows/test.yml
+@@ -10,8 +10,11 @@
+   e2e:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v7
+         with:
+           fetch-depth: 0
+-      - name: Browser smoke test
+-        run: bunx playwright test --shard=\${{ matrix.shard }}/3
++      - name: Browser smoke test (leanest-selected specs)
++        uses: baronunread/leanest@v1
++        with:
++          framework: playwright
++          # defaults to classifier-dev: free, no key needed
+`
 
 export const PIPELINE = [
   {
@@ -43,7 +42,7 @@ export const PIPELINE = [
   {
     icon: 'sparkle',
     label: 'Judge',
-    body: 'One semantic question per test, evaluated in parallel by Jev: could this diff affect it.',
+    body: 'One semantic question per test, evaluated in parallel by your judge provider: could this diff affect it.',
   },
   {
     icon: 'list-checks',
@@ -62,6 +61,17 @@ export const COMMANDS: Array<{ cmd: string; body: string }> = [
   { cmd: 'leanest vitest', body: 'Select, then actually run Vitest on the selection.' },
   { cmd: 'leanest select playwright', body: 'Show the selection only, run nothing.' },
   { cmd: 'leanest inspect playwright', body: 'Rank every test by relevance, for debugging.' },
+]
+
+export const PROVIDERS: Array<{ name: string; how: string; key: string; default?: boolean }> = [
+  {
+    name: 'classifier-dev',
+    how: 'classifier.dev, a free zero-shot classifier',
+    key: 'none',
+    default: true,
+  },
+  { name: 'jev', how: "TypeSafe's Jev, over HTTP", key: 'TYPESAFE_API_KEY' },
+  { name: 'laya', how: 'Laya, self-hosted, runs in-process via ONNX Runtime', key: 'none' },
 ]
 
 export const OPTIONS: Array<{ flag: string; body: string }> = [

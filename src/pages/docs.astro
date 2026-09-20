@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import Fenced from '../components/Fenced.astro'
+import CopyButton from '../components/CopyButton.astro'
+import { ACTION_YAML, COMMANDS, OPTIONS, PROVIDERS } from '../data'
+
+const sections = [
+  { id: 'install', label: 'Install' },
+  { id: 'configuration', label: 'Configuration' },
+  { id: 'commands', label: 'Commands' },
+  { id: 'flags', label: 'Flags' },
+  { id: 'providers', label: 'Judge providers' },
+  { id: 'ci', label: 'CI integration' },
+  { id: 'behavior', label: 'Behavior' },
+]
+
+const env = [
+  { name: 'LEANEST_PROVIDER', desc: 'Judge provider to use: classifier-dev, jev, or laya.', default: 'classifier-dev' },
+  { name: 'TYPESAFE_API_KEY', desc: 'API key for the jev provider. Unused by classifier-dev and laya.', default: '(none)' },
+  { name: 'TYPESAFE_API_BASE', desc: 'Base URL for the jev provider.', default: 'https://api.typesafe.ai/v1' },
+  { name: 'TYPESAFE_MODEL', desc: 'Model name for the jev provider.', default: 'jev-latest' },
+]
+---
+
+<Layout title="Docs - leanest" description="Reference for the leanest CLI: install, configuration, commands, flags, judge providers, and CI integration.">
+  <Nav />
+
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[200px_1fr]">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24 flex flex-col gap-1 border-l border-[#1c211d] pl-4 text-sm">
+          {
+            sections.map((s) => (
+              <a href={`#${s.id}`} class="py-1 text-[#9aa39d] transition-colors hover:text-[#f2f4f2]">
+                {s.label}
+              </a>
+            ))
+          }
+        </nav>
+      </aside>
+
+      <main class="min-w-0 text-[15px] leading-relaxed">
+        <h1 class="text-2xl font-semibold tracking-tight">Docs</h1>
+        <p class="mt-2 text-[#9aa39d]">Reference for the leanest CLI.</p>
+
+        <section id="install" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">Install</h2>
+          <p class="mt-2 text-[#9aa39d]">
+            Requires <a href="https://bun.sh" target="_blank" rel="noreferrer" class="underline decoration-[#2c332e] underline-offset-2 hover:text-[#f2f4f2]">Bun</a>. The CLI runs the TypeScript source directly; there is no build step.
+          </p>
+          <div class="mt-3 border border-[#232623] bg-[#121513]">
+            <Fenced class="px-4 py-3">bun add -D leanest</Fenced>
+          </div>
+        </section>
+
+        <section id="configuration" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">Configuration</h2>
+          <p class="mt-2 text-[#9aa39d]">
+            leanest loads <code class="font-mono text-[#c9d1cb]">.env</code> from the current directory. Environment variables:
+          </p>
+          <table class="mt-3 w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-[#232623] text-left text-[#7c8a80]">
+                <th class="py-2 pr-4 font-normal">Variable</th>
+                <th class="py-2 pr-4 font-normal">Description</th>
+                <th class="py-2 font-normal">Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                env.map((e) => (
+                  <tr class="border-b border-[#1c211d]">
+                    <td class="py-2 pr-4 align-top font-mono text-[#c9d1cb]">{e.name}</td>
+                    <td class="py-2 pr-4 align-top text-[#9aa39d]">{e.desc}</td>
+                    <td class="py-2 align-top font-mono text-[#7c8a80]">{e.default}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <section id="commands" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">Commands</h2>
+          <table class="mt-3 w-full border-collapse text-sm">
+            <tbody>
+              {
+                COMMANDS.map(({ cmd, body }) => (
+                  <tr class="border-b border-[#1c211d]">
+                    <td class="w-64 py-2 pr-4 align-top font-mono text-[#c9d1cb]">{cmd}</td>
+                    <td class="py-2 align-top text-[#9aa39d]">{body}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <section id="flags" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">Flags</h2>
+          <table class="mt-3 w-full border-collapse text-sm">
+            <tbody>
+              {
+                OPTIONS.map(({ flag, body }) => (
+                  <tr class="border-b border-[#1c211d]">
+                    <td class="w-48 py-2 pr-4 align-top font-mono text-[#c9d1cb]">{flag}</td>
+                    <td class="py-2 align-top text-[#9aa39d]">{body}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </section>
+
+        <section id="providers" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">Judge providers</h2>
+          <p class="mt-2 text-[#9aa39d]">
+            Set with <code class="font-mono text-[#c9d1cb]">LEANEST_PROVIDER</code>.
+          </p>
+          <table class="mt-3 w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-b border-[#232623] text-left text-[#7c8a80]">
+                <th class="py-2 pr-4 font-normal">Name</th>
+                <th class="py-2 pr-4 font-normal">Description</th>
+                <th class="py-2 font-normal">Key required</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                PROVIDERS.map((p) => (
+                  <tr class="border-b border-[#1c211d]">
+                    <td class="py-2 pr-4 align-top font-mono text-[#c9d1cb]">
+                      {p.name}
+                      {p.default ? ' (default)' : ''}
+                    </td>
+                    <td class="py-2 pr-4 align-top text-[#9aa39d]">{p.how}</td>
+                    <td class="py-2 align-top font-mono text-[#7c8a80]">{p.key}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <div class="mt-3 border border-[#232623] bg-[#121513]">
+            <Fenced class="px-4 py-3">LEANEST_PROVIDER=jev npx leanest playwright</Fenced>
+          </div>
+        </section>
+
+        <section id="ci" class="mt-10">
+          <h2 class="text-lg font-semibold tracking-tight">CI integration</h2>
+          <p class="mt-2 text-[#9aa39d]">GitHub Actions:</p>
+          <div class="mt-3 border border-[#232623] bg-[#121513]">
+            <div class="flex items-center justify-between border-b border-[#1c211d] px-4 py-2">
+              <span class="font-mono text-xs text-[#7c8a80]">.github/workflows/test.yml</span>
+              <CopyButton text={ACTION_YAML} />
+            </div>
+            <Fenced class="px-4 py-4">{ACTION_YAML}</Fenced>
+          </div>
+          <p class="mt-4 text-[#9aa39d]">
+            <code class="font-mono text-[#c9d1cb]">typesafe-api-key</code> is only needed when
+            <code class="font-mono text-[#c9d1cb]">provider</code> is set to <code class="font-mono text-[#c9d1cb]">jev</code>.
+            Any other CI system: install and run the CLI directly.
+          </p>
+          <div class="mt-3 border border-[#232623] bg-[#121513]">
+            <Fenced class="px-4 py-3"
+              >{`bun add -g leanest
+leanest playwright --base origin/main`}</Fenced
+            >
+          </div>
+        </section>
+
+        <section id="behavior" class="mt-10 mb-4">
+          <h2 class="text-lg font-semibold tracking-tight">Behavior</h2>
+          <ul class="mt-2 list-disc space-y-2 pl-5 text-[#9aa39d]">
+            <li>
+              <strong class="text-[#c9d1cb]">Fail open.</strong> A missing or invalid provider key, an
+              API timeout, or a malformed response runs the full suite and prints why, instead of
+              silently skipping coverage.
+            </li>
+            <li>
+              <strong class="text-[#c9d1cb]">Deterministic overrides.</strong> A test always runs,
+              regardless of the judge's answer, if: its own file changed, it statically imports a
+              changed file, or it navigates a route a changed file's path names (e.g.
+              <code class="font-mono text-[#c9d1cb]">page.goto("/admin/users")</code> against a
+              changed <code class="font-mono text-[#c9d1cb]">routes/admin/users.tsx</code>).
+            </li>
+            <li>
+              <strong class="text-[#c9d1cb]">No changes detected.</strong> When the diff is empty
+              (e.g. a pure CI or config change with no application code), every test is evaluated
+              conservatively rather than skipped outright.
+            </li>
+            <li>
+              <strong class="text-[#c9d1cb]">No server.</strong> The CLI calls the selected
+              provider directly with your credentials, if any. Nothing routes through
+              leanest's own infrastructure, because there isn't any.
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>

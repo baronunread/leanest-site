@@ -4,7 +4,6 @@ import Nav from '../components/Nav.astro'
 import Hero from '../components/Hero.astro'
 import Stats from '../components/Stats.astro'
 import Pipeline from '../components/Pipeline.astro'
-import Cli from '../components/Cli.astro'
 import Byok from '../components/Byok.astro'
 import Cta from '../components/Cta.astro'
 import Footer from '../components/Footer.astro'
@@ -12,15 +11,14 @@ import Footer from '../components/Footer.astro'
 
 <Layout
   title="leanest - run only the tests your PR can affect"
-  description="leanest diffs your PR against main, asks one semantic judgment per e2e spec, and runs only the tests it can't confidently rule out through your real Playwright or Vitest runner. Fails open. Bring your own TypeSafe API key."
-  ogDescription="leanest diffs your PR, judges each e2e spec in parallel, and runs the real subset through your existing runner. Fails open, BYOK."
-  twitterDescription="Diffs your PR, judges each e2e spec in parallel, and runs the real subset. Fails open, BYOK."
+  description="leanest diffs your PR against main, asks one semantic judgment per e2e spec, and runs only the tests it can't confidently rule out through your real Playwright or Vitest runner. Model-agnostic: classifier.dev by default (free, no key), or swap in Jev or a self-hosted Laya. Fails open."
+  ogDescription="leanest diffs your PR, judges each e2e spec in parallel, and runs the real subset through your existing runner. Model-agnostic judge providers, fails open."
+  twitterDescription="Diffs your PR, judges each e2e spec in parallel, and runs the real subset. Model-agnostic, fails open."
 >
   <Nav />
   <Hero />
   <Stats />
   <Pipeline />
-  <Cli />
   <Byok />
   <Cta />
   <Footer />
