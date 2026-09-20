@@ -1,0 +1,32 @@
+---
+interface Props {
+  diff: string
+  class?: string
+}
+
+const { diff, class: className = '' } = Astro.props
+const lines = diff.split('\n')
+
+function lineClass(line: string): string {
+  if (line.startsWith('+')) return 'text-[#7cf0b6]'
+  if (line.startsWith('-')) return 'text-[#7c8a80] line-through decoration-[#4a5450]'
+  return 'text-[#c9d1cb]'
+}
+---
+
+<div class="relative">
+  <pre
+    class:list={[
+      'overflow-x-auto font-mono text-xs leading-relaxed sm:text-[13px]',
+      className,
+    ]}>{lines.map((line, i) => (
+      <Fragment>
+        <span class={lineClass(line)}>{line}</span>
+        {i < lines.length - 1 && '\n'}
+      </Fragment>
+    ))}</pre>
+  <div
+    class="pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-[#121513] to-transparent"
+  >
+  </div>
+</div>

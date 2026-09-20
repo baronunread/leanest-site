@@ -10,6 +10,20 @@ export const ACTION_YAML = `- uses: actions/checkout@v4
     framework: playwright
     # defaults to classifier-dev: free, no key needed`
 
+export const CI_DIFF = ` e2e:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v7
+       with:
+         fetch-depth: 0
+-    - name: Browser smoke test
+-      run: bunx playwright test --shard=\${{ matrix.shard }}/3
++    - name: Browser smoke test (leanest-selected specs)
++      uses: baronunread/leanest@v1
++      with:
++        framework: playwright
++        # defaults to classifier-dev: free, no key needed`
+
 export const TERMINAL_OUTPUT = `$ leanest select playwright --base origin/main
 
 Changed:
